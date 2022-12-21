@@ -31,4 +31,10 @@ public class ContaAtiva implements Serializable {
 	public void setTitularConta(String titularConta) {
 		this.titularConta = titularConta;
 	}
+
+	@Override
+	public String toString() {
+		return "ContaAtiva [contaAtiva=" + contaAtiva + ", titularConta=" + titularConta + "]";
+	}
+
 }

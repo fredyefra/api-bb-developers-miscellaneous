@@ -15,7 +15,7 @@ public abstract class TokenWrapper {
 	 * @see WebClient
 	 * @param client_credentials - developers BB
 	 * @param scope              - developers BB
-	 * @param
+	 * @param bearer
 	 */
 	public abstract Token tokenObject(String client_credentials, String scope, String bearer);
 
@@ -27,8 +27,8 @@ public abstract class TokenWrapper {
 	 * @see Token
 	 * @see WebClient
 	 * @param client_credentials - developers BB
-	 * @param scope              - developers BB
-	 * @param basic
+	 * @param scope
+	 * @param bearer
 	 */
 	public abstract String tokenString(String client_credentials, String scope, String bearer);
 }

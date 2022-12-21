@@ -49,10 +49,13 @@ public class TokenService extends TokenWrapper {
 		body.add("scope", scope);
 
 		Token token = client.post()
-				.uri(ENDPOINT).header("Authorization", bearer)
+				.uri(ENDPOINT).
+				 header("Authorization", bearer)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromFormData(body))
-				.retrieve().bodyToMono(Token.class).block();
+				.body(BodyInserters
+				.fromFormData(body))
+				.retrieve()
+				.bodyToMono(Token.class).block();
 
 		String tokenAccess = token.getAccess_token();
 
