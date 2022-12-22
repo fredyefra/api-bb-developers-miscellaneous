@@ -4,7 +4,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import br.com.bb.developers.model.Token;
 
-public abstract class TokenWrapper {
+//@Service
+public abstract interface TokenWrapper {
 
 	/**
 	 * Disponibiliza o objeto Token os parametros e credencias estão disponiveis no portal
@@ -13,11 +14,11 @@ public abstract class TokenWrapper {
 	 * @author proitec-legacy
 	 * @see Token
 	 * @see WebClient
-	 * @param client_credentials - developers BB
-	 * @param scope              - developers BB
-	 * @param bearer
+	 * @param client_credentials - portal developers BB
+	 * @param scope              - portal developers BB
+	 * @param bearer             - portal developers BB
 	 */
-	public abstract Token tokenObject(String client_credentials, String scope, String bearer);
+	public abstract Token tokenObject(String client_credentials, String scope, String basic);
 
 	/**
 	 * Disponibiliza a String Token os parametros e credencias estão disponiveis no portal
@@ -26,9 +27,9 @@ public abstract class TokenWrapper {
 	 * @author proitec-legacy
 	 * @see Token
 	 * @see WebClient
-	 * @param client_credentials - developers BB
-	 * @param scope
-	 * @param bearer
+	 * @param client_credentials - portal developers BB
+	 * @param scope              - portal developers BB
+	 * @param bearer             - portal developers BB
 	 */
-	public abstract String tokenString(String client_credentials, String scope, String bearer);
+	public abstract String tokenString(String client_credentials, String scope, String basic);
 }

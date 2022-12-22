@@ -4,7 +4,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import br.com.bb.developers.model.ContaAtiva;
 
-public abstract class ContaAtivaWrapper {
+public abstract interface ContaAtivaWrapper {
 
 	/**
 	 * Disponibiliza o objeto ContaAtiva os parametros e credencias estão disponiveis no portal
