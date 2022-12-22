@@ -12,7 +12,7 @@ import br.com.bb.developers.service.ContaAtivaWrapper;
  */
 
 @Component
-public class ContaAtivaService extends ContaAtivaWrapper {
+public class ContaAtivaService implements ContaAtivaWrapper {
 
 	private static final String ENDPOINT = "https://api.hm.bb.com.br/validacao-contas/v1";
 

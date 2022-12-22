@@ -15,12 +15,12 @@ import br.com.bb.developers.service.TokenWrapper;
  */
 
 @Service
-public class TokenService extends TokenWrapper {
+public class TokenService implements TokenWrapper {
 
 	private static final String ENDPOINT = "https://oauth.hm.bb.com.br/oauth/token";
 
 	@Override
-	public Token tokenObject(String client_credentials, String scope, String bearer) {
+	public Token tokenObject(String client_credentials, String scope, String basic) {
 
 		WebClient client = WebClient.create();
 
@@ -31,7 +31,7 @@ public class TokenService extends TokenWrapper {
 		// body.add("scope", "cob.write cob.read pix.read pix.write");
 
 		Token token = client.post().uri(ENDPOINT)
-				.header("Authorization",bearer)
+				.header("Authorization",basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters.fromFormData(body))
 				.retrieve().bodyToMono(Token.class).block();
@@ -40,7 +40,7 @@ public class TokenService extends TokenWrapper {
 	}
 
 	@Override
-	public String tokenString(String client_credentials, String scope, String bearer) {
+	public String tokenString(String client_credentials, String scope, String basic) {
 		
 		WebClient client = WebClient.create();
 
@@ -50,7 +50,7 @@ public class TokenService extends TokenWrapper {
 
 		Token token = client.post()
 				.uri(ENDPOINT).
-				 header("Authorization", bearer)
+				 header("Authorization", basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters
 				.fromFormData(body))
