@@ -13,9 +13,7 @@ public abstract interface ContaAtivaWrapper {
 	 * @author proitec-legacy
 	 * @see ContaAtiva
 	 * @see WebClient
-	 * @param client_credentials - developers BB
-	 * @param scope
-	 * @param bearer
+	 * @param bearer - portal developers BB
 	 */
 	public abstract ContaAtiva contaAtivaObject(String bearer);
 }
