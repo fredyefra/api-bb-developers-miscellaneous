@@ -11,28 +11,26 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.bb.developers.model.ContaAtiva;
 import br.com.bb.developers.service.ContaAtivaWrapper;
 import br.com.bb.developers.service.TokenWrapper;
-import br.com.bb.developers.service.impl.ContaAtivaService;
-import br.com.bb.developers.service.impl.TokenService;
 
 @RestController
 @RequestMapping(value = "developers/bb/v1")
 public class APIValidacaoContaAtivaResource {
 
-	//@Autowired 
-	private TokenWrapper service = new TokenService();  
+	@Autowired
+	private TokenWrapper token;  
 
-	//@Autowired
-	private ContaAtivaWrapper conta = new ContaAtivaService();
+	@Autowired
+	private ContaAtivaWrapper conta;
 	
 	@PostMapping
-	public String gerarToken(@RequestHeader(required = true, name = "Authorization") String basic) {
-		String bearer = service.tokenString("client_credentials", "validacao-contas.info", basic);
-		return bearer;
+	public ResponseEntity<String> gerarToken(@RequestHeader(required = true, name = "Authorization") String basic) {
+		String bearer = token.tokenString("client_credentials", "validacao-contas.info", basic);
+		return ResponseEntity.ok().body(bearer);
 	}
 
 	@GetMapping(value = "/validacao-conta")
 	public ResponseEntity<ContaAtiva> verificaContaAtiva(@RequestHeader(required = true, name = "Authorization") String bearer) {
         ContaAtiva contaAtiva = conta.contaAtivaObject(bearer);  
-		return ResponseEntity.ok().body(contaAtiva);
+        return ResponseEntity.ok().body(contaAtiva);
 	}
 }
