@@ -30,13 +30,16 @@ public class TokenService implements TokenWrapper {
 		// body.add("grant_type", "client_credentials");
 		// body.add("scope", "cob.write cob.read pix.read pix.write");
 
-		Token token = client.post().uri(ENDPOINT)
+		Token object = client.post()
+				.uri(ENDPOINT)
 				.header("Authorization",basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters.fromFormData(body))
-				.retrieve().bodyToMono(Token.class).block();
+				.retrieve()
+				.bodyToMono(Token.class)
+				.block();
 
-		return token;
+		return object;
 	}
 
 	@Override
@@ -49,13 +52,14 @@ public class TokenService implements TokenWrapper {
 		body.add("scope", scope);
 
 		Token token = client.post()
-				.uri(ENDPOINT).
-				 header("Authorization", basic)
+				.uri(ENDPOINT)
+				. header("Authorization", basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters
 				.fromFormData(body))
 				.retrieve()
-				.bodyToMono(Token.class).block();
+				.bodyToMono(Token.class)
+				.block();
 
 		String tokenAccess = token.getAccess_token();
 
