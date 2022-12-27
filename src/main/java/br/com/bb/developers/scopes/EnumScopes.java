@@ -7,8 +7,9 @@ package br.com.bb.developers.scopes;
 public enum EnumScopes {
 
 	ESCOPO_CONTA_ATIVA("validacao-contas.info"), 
-	ESCOPO_COBRANCA_PIX("cob.write cob.read pix.read pix.write");
-
+	ESCOPO_COBRANCA_PIX("cob.write cob.read pix.read pix.write"),
+	ESCOPO_BB_PAY("checkout.solicitacao-pagamento-requisicao checkout.pagamentos-requisicao checkout.pagamentos-info checkout.marcas-ativas-info");
+	
 	private String escopo;
 
 	EnumScopes(String escopo) {
