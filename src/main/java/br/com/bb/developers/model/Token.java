@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @author proitec-legacy
- * Token de acesso que deve ser informado nas requisições das APIs do BB.
+ * @see Token de acesso que deve ser informado nas requisições das APIs do BB.
  * Classe que 'representa' o token com as informações do ENDPOINT.
  */
 public class Token implements Serializable {

@@ -3,19 +3,20 @@ package br.com.bb.developers.model;
 import java.io.Serializable;
 
 /**
- * @author proitec-legacy Classe que 'representa' a cobrança de pix com as
+ * @author proitec-legacy 
+ * @see Classe que 'representa' a cobrança de pix com as
  *         informações do ENDPOINT.
  */
 public class Pix implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String status;
-	private Calendario calendario;
+	private PixCalendario calendario;
 	private String location;
 	private String textoImagemQRcode;
 	private String txid;
 	private Integer revisao;
-	private Devedor devedor;
-	private Valor valor;
+	private PixDevedor devedor;
+	private PixValor valor;
 	private String chave;
 	private String solicitacaoPagador;
 
@@ -27,11 +28,11 @@ public class Pix implements Serializable {
 		this.status = status;
 	}
 
-	public Calendario getCalendario() {
+	public PixCalendario getCalendario() {
 		return calendario;
 	}
 
-	public void setCalendario(Calendario calendario) {
+	public void setCalendario(PixCalendario calendario) {
 		this.calendario = calendario;
 	}
 
@@ -67,19 +68,19 @@ public class Pix implements Serializable {
 		this.revisao = revisao;
 	}
 
-	public Devedor getDevedor() {
+	public PixDevedor getDevedor() {
 		return devedor;
 	}
 
-	public void setDevedor(Devedor devedor) {
+	public void setDevedor(PixDevedor devedor) {
 		this.devedor = devedor;
 	}
 
-	public Valor getValor() {
+	public PixValor getValor() {
 		return valor;
 	}
 
-	public void setValor(Valor valor) {
+	public void setValor(PixValor valor) {
 		this.valor = valor;
 	}
 
@@ -98,61 +99,15 @@ public class Pix implements Serializable {
 	public void setSolicitacaoPagador(String solicitacaoPagador) {
 		this.solicitacaoPagador = solicitacaoPagador;
 	}
-}
 
-class Calendario implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private String criacao;
-	private String expiracao;
-
-	public String getCriacao() {
-		return criacao;
-	}
-
-	public void setCriacao(String criacao) {
-		this.criacao = criacao;
-	}
-
-	public String getExpiracao() {
-		return expiracao;
-	}
-
-	public void setExpiracao(String expiracao) {
-		this.expiracao = expiracao;
+	@Override
+	public String toString() {
+		return "Pix [status=" + status + ", calendario=" + calendario + ", location=" + location
+				+ ", textoImagemQRcode=" + textoImagemQRcode + ", txid=" + txid + ", revisao=" + revisao + ", devedor="
+				+ devedor + ", valor=" + valor + ", chave=" + chave + ", solicitacaoPagador=" + solicitacaoPagador
+				+ "]";
 	}
 }
 
-class Devedor implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private String cpf;
-	private String nome;
+  
 
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-}
-
-class Valor implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private String original;
-
-	public String getOriginal() {
-		return original;
-	}
-
-	public void setOriginal(String original) {
-		this.original = original;
-	}
-}
