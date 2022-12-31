@@ -15,6 +15,17 @@ public interface PixWrapper {
 	 * @see WebClient
 	 * @param bearer - portal developers BB
 	 */
-	public Pix pixObject(String bearer);
+	public Pix pixObject(String bearer, Pix pix);
+	
+	/**
+	 * Disponibiliza o objeto Pix os parametros e credencias estão disponiveis no portal
+	 * developers bb.
+	 * @return String
+	 * @author proitec-legacy
+	 * @see Pix
+	 * @see WebClient
+	 * @param bearer - portal developers BB
+	 */
+	public String pixString(String bearer, Pix pix);
 	
 }
