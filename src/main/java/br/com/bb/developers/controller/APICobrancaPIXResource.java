@@ -3,6 +3,7 @@ package br.com.bb.developers.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.bb.developers.model.Pix;
 import br.com.bb.developers.service.PixWrapper;
 import br.com.bb.developers.service.TokenWrapper;
+import io.swagger.annotations.Api;
 
+@CrossOrigin("http://localhost:8080") // Swagger Annotation
+@Api(value = "pix-resource") // Swagger Annotation
 @RestController
 @RequestMapping(value = "developers/bb/cobranca-pix/v1")
 public class APICobrancaPIXResource {
