@@ -6,11 +6,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 import br.com.bb.developers.model.Pix;
 import br.com.bb.developers.service.PixWrapper;
 
+/**
+ * @author proitec-legacy 
+ * @apiNote Classe com os parametros de configuração da cobrança de PIX
+ * @see Pix
+ */
 @Service
 public class PixService implements PixWrapper {
 
-	private static final String ENDPOINT = "https://api.hm.bb.com.br/pix/v1/cob/";
-	
 	@Override
 	public Pix pixObject(String bearer, Pix pix) {
 		

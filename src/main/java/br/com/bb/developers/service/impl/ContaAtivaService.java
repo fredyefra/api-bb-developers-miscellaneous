@@ -8,18 +8,18 @@ import br.com.bb.developers.service.ContaAtivaWrapper;
 
 /**
  * @author proitec-legacy
- * Classe com os parametros de configuração da conta-ativa.
+ * @apiNote Classe com os parametros de configuração da conta-ativa.
+ * @see ContaAtiva
  */
-
 @Service
 public class ContaAtivaService implements ContaAtivaWrapper {
 
-	private static final String ENDPOINT = "https://api.hm.bb.com.br/validacao-contas/v1";
+	//private static final String ENDPOINT = "https://api.hm.bb.com.br/validacao-contas/v1";
 
 	@Override
 	public ContaAtiva contaAtivaObject(String bearer) {
 		
-		WebClient client = WebClient.create(ENDPOINT);
+		WebClient client = WebClient.create(br.com.bb.developers.util.endpoint.EndPoint.ENDPOINT_CONTA_ATIVA);
 		
 		ContaAtiva object = client.get()
 				.uri(builder -> builder.path("/contas/0551-1000/situacao")
