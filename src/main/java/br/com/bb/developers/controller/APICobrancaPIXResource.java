@@ -15,13 +15,11 @@ import br.com.bb.developers.service.PixWrapper;
 import br.com.bb.developers.service.TokenWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.Hidden;
 
 //@CrossOrigin("*") 
-@Api(value = "pix-resource") 
+@Api(value = "pix-resource", tags = "Endpoints destinados a cobrança de PIX.")
 @RestController
-@RequestMapping(value = "developers/bb/cobranca-pix/v1")
-@Hidden
+@RequestMapping(value = "developers/bb/cob-pix/v1")
 public class APICobrancaPIXResource {
 
 	@Autowired
@@ -30,15 +28,15 @@ public class APICobrancaPIXResource {
 	@Autowired
 	private PixWrapper pix;
 	
-	@ApiOperation(value = "Token de acesso deve ser informado nas requisições da API'S.")
-	@PostMapping
+	@ApiOperation(value = "Gera o Token de acesso.")
+	@PostMapping(value = "/gerar-token")
 	public ResponseEntity<String> gerarToken(@RequestHeader(required = true, name = "Authorization") String basic) {
 		String bearer = token.tokenString("client_credentials", "cob.write cob.read pix.read pix.write", basic);
 		return ResponseEntity.ok().body(bearer);
 	}
 
-	@ApiOperation(value = "Gerar cobrança PIX.")
-    @PutMapping(value= "/gerar-cobranca-pix")
+	@ApiOperation(value = "Gera a cobrança PIX.")
+    @PutMapping(value = "/gerar-cobranca-pix")
 	public ResponseEntity<Pix> gerarCobranca(@RequestHeader(required = true, name = "Authorization") String bearer,
     @RequestBody Pix cobranca)
 	{
