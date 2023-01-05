@@ -18,8 +18,6 @@ import br.com.bb.developers.service.TokenWrapper;
 @Service
 public class TokenService implements TokenWrapper {
 
-	//private static final String ENDPOINT = "https://oauth.hm.bb.com.br/oauth/token";
-
 	@Override
 	public Token tokenObject(String client_credentials, String scope, String basic) {
 
@@ -31,7 +29,7 @@ public class TokenService implements TokenWrapper {
 
 		Token object = client.post()
 				//.uri(ENDPOINT)
-				.uri(br.com.bb.developers.util.endpoint.EndPoint.ENDPOINT_TOKEN)
+				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_TOKEN)
 				.header("Authorization",basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters.fromFormData(body))
@@ -53,7 +51,7 @@ public class TokenService implements TokenWrapper {
 
 		Token token = client.post()
 				//.uri(ENDPOINT)
-				.uri(br.com.bb.developers.util.endpoint.EndPoint.ENDPOINT_TOKEN)
+				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_TOKEN)
 				. header("Authorization", basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters

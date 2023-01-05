@@ -17,7 +17,7 @@ public class PixService implements PixWrapper {
 	@Override
 	public Pix pixObject(String bearer, Pix pix) {
 		
-        WebClient client = WebClient.create("https://api.hm.bb.com.br/pix/v1");
+        WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_PIX_COBRANCA);
 		
 		Pix object = client.put()
 				.uri(builder -> builder.path("/cob/")
@@ -38,8 +38,8 @@ public class PixService implements PixWrapper {
 	@Override
 	public String pixString(String bearer, Pix pix) {
 		
-        WebClient client = WebClient.create("https://api.hm.bb.com.br/pix/v1");
-    	
+        WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_PIX_COBRANCA);
+		
 		String string = client.put()
 				.uri(builder -> builder.path("/cob/")
 				.queryParam("gw-dev-app-key","d27b577902ffabc01361e17db0050356b931a5ba")

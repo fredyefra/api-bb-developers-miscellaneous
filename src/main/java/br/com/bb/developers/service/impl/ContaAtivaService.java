@@ -14,12 +14,10 @@ import br.com.bb.developers.service.ContaAtivaWrapper;
 @Service
 public class ContaAtivaService implements ContaAtivaWrapper {
 
-	//private static final String ENDPOINT = "https://api.hm.bb.com.br/validacao-contas/v1";
-
 	@Override
 	public ContaAtiva contaAtivaObject(String bearer) {
 		
-		WebClient client = WebClient.create(br.com.bb.developers.util.endpoint.EndPoint.ENDPOINT_CONTA_ATIVA);
+		WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_CONTA_ATIVA);
 		
 		ContaAtiva object = client.get()
 				.uri(builder -> builder.path("/contas/0551-1000/situacao")
