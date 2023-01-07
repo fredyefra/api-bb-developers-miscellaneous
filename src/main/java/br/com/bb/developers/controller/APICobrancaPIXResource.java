@@ -47,7 +47,7 @@ public class APICobrancaPIXResource {
 		//cobranca.setChave("testqrcode01@bb.com.br");
 		//cobranca.setValor(valor);
 		
-		Pix pixObject = pix.pixObject(bearer, cobranca);
+		Pix pixObject = pix.gerarPixObject(bearer, cobranca);
 		//return ResponseEntity.ok().body(pixString);
 		return new ResponseEntity<Pix>(pixObject, HttpStatus.CREATED);
 	}
