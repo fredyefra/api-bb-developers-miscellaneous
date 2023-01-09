@@ -3,7 +3,11 @@ package br.com.bb.developers.util.endpoints;
 /**
  * @author proitec-legacy Classe com os endpoints disponíveis no bb developers.
  */
-public class EndPoint {
+public final class EndPoint {
+
+	private EndPoint() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * Constante equivalente a "https://oauth.hm.bb.com.br/oauth/token".
@@ -18,6 +22,6 @@ public class EndPoint {
 	/**
 	 * Constante equivalente a "https://api.hm.bb.com.br/pix/v1/cob/".
 	 */
-	public static final String ENDPOINT_PIX_COBRANCA = "https://api.hm.bb.com.br/pix/v1/cob/";
+	public static final String ENDPOINT_PIX_COBRANCA = "https://api.hm.bb.com.br/pix/v1";
 
 }
