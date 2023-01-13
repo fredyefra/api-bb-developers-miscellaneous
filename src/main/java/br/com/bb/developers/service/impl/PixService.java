@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import br.com.bb.developers.exception.ErrorInternalException;
+import br.com.bb.developers.exception.NotFoundException;
 import br.com.bb.developers.model.Pix;
 import br.com.bb.developers.service.PixWrapper;
 import reactor.core.publisher.Mono;
@@ -31,13 +33,16 @@ public class PixService implements PixWrapper {
 				.bodyValue(pix)
 				//.body(BodyInserters.fromValue(null))
 				.retrieve()
-				.onStatus(HttpStatus::is5xxServerError, response -> Mono.just(new MyException("500 error!")))
+				.onStatus(HttpStatus::is4xxClientError, response -> {
+	                 return Mono.error(new NotFoundException("Deu zica erro 404"));
+	             })
+				.onStatus(HttpStatus::is5xxServerError, response -> {
+	                 return Mono.error(new ErrorInternalException("Deu zica erro 500"));
+	             })
 				.bodyToMono(Pix.class);		
 	
 				Pix block = object.share().block();
 				
 		return block;	
 	}
-
-	
 }
