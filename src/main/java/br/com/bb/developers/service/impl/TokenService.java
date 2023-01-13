@@ -11,10 +11,9 @@ import br.com.bb.developers.service.TokenWrapper;
 
 /**
  * @author proitec-legacy
- * Classe com os parametros de configuração do token.
+ * @apiNote Classe com os parametros de configuração do token.
  * @see Token
  */
-
 @Service
 public class TokenService implements TokenWrapper {
 
@@ -30,7 +29,7 @@ public class TokenService implements TokenWrapper {
 		Token object = client.post()
 				//.uri(ENDPOINT)
 				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_TOKEN)
-				.header("Authorization",basic)
+				.header("Authorization", basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters.fromFormData(body))
 				.retrieve()
