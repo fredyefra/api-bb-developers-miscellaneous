@@ -1,10 +1,14 @@
 package br.com.bb.developers.service.impl;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import br.com.bb.developers.exception.ErrorInternalException;
+import br.com.bb.developers.exception.NotFoundException;
 import br.com.bb.developers.model.ContaAtiva;
 import br.com.bb.developers.service.ContaAtivaWrapper;
+import reactor.core.publisher.Mono;
 
 /**
  * @author proitec-legacy
@@ -27,6 +31,12 @@ public class ContaAtivaService implements ContaAtivaWrapper {
 				.header("Authorization" , bearer)
 				.header("Content-Type", "application/json")
 				.retrieve()
+				.onStatus(HttpStatus::is4xxClientError, response -> {
+	                 return Mono.error(new NotFoundException("Deu zica erro 404"));
+	             })
+				.onStatus(HttpStatus::is5xxServerError, response -> {
+	                 return Mono.error(new ErrorInternalException("Deu zica erro 500"));
+	             })
 				.bodyToMono(ContaAtiva.class)
 				.block();
 	
