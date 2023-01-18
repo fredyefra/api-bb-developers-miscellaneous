@@ -32,7 +32,7 @@ public class BBDevelopersHandlerException {
 	 * @return {@link ErrorInternalException}
 	 */
 	@ExceptionHandler(ErrorInternalException.class)
-	public ResponseEntity<BBDevelopersException> handlerErrorInternal(ErrorInternalException exception,
+	public ResponseEntity<?> handlerErrorInternal(ErrorInternalException exception,
 			HttpServletRequest request) {
 
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
