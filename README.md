@@ -41,3 +41,4 @@ WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint
 				.bodyToMono(Pix.class);
 
 ```
+<img src="https://github.com/fredyefra/api-bb-developers-miscellaneous/blob/master/src/main/resources/img/image-pix.jpg" alt="My-cool-logo"/>
