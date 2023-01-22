@@ -2,7 +2,7 @@ package br.com.bb.developers.exception;
 
 /**
  * @author proitec-legacy 
- * Parametro de configuração error 500
+ * @see    Parametro de configuração error 500
  */
 public class ErrorInternalException extends RuntimeException {
 	

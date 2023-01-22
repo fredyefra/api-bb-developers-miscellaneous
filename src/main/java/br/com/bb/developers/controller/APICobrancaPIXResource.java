@@ -1,8 +1,11 @@
 package br.com.bb.developers.controller;
 
+import javax.ws.rs.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +18,7 @@ import br.com.bb.developers.service.PixWrapper;
 import br.com.bb.developers.service.TokenWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import reactor.core.publisher.Mono;
 
 //@CrossOrigin("*") 
 @Api(value = "pix-resource", tags = "Endpoints destinados a cobrança de PIX.")
@@ -51,4 +55,11 @@ public class APICobrancaPIXResource {
 		//return ResponseEntity.ok().body(pixString);
 		return new ResponseEntity<Pix>(pixObject, HttpStatus.CREATED);
 	}
+
+	@ApiOperation(value = "Consulta a cobrança PIX.")
+    @GetMapping(value = "/consultar-cobranca-pix")
+    public Mono<Pix> consultarCobranca(@RequestHeader(required = true, name = "Authorization") String bearer, 
+    		@PathParam(value = "0") String txid){
+    	return null;
+    }
 }
