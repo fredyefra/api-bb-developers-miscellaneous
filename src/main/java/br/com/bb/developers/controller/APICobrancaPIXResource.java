@@ -1,7 +1,5 @@
 package br.com.bb.developers.controller;
 
-import javax.ws.rs.Path;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bb.developers.model.Pix;
@@ -36,6 +33,7 @@ public class APICobrancaPIXResource {
 	@ApiOperation(value = "Gera o Token de acesso.")
 	@PostMapping(value = "/gerar-token")
 	public ResponseEntity<String> gerarToken(@RequestHeader(required = true, name = "Authorization") String basic) {
+		
 		String bearer = token.tokenString("client_credentials", "cob.write cob.read pix.read pix.write", basic);
 		return ResponseEntity.ok().body(bearer);
 	}
@@ -44,14 +42,16 @@ public class APICobrancaPIXResource {
 	@PutMapping(value = "/gerar-cobranca-pix")
 	public ResponseEntity<Pix> gerarCobranca(@RequestHeader(required = true, name = "Authorization") String bearer,
 			@RequestBody Pix cobranca) {
+		
 		return new ResponseEntity<Pix>(pix.gerarPixObject(bearer, cobranca), HttpStatus.CREATED);
 	}
 
 	@ApiOperation(value = "Consulta a cobrança PIX.")
-	@GetMapping(value = "/consultar-cobranca-pix")
+	@GetMapping(value = "/consultar-cobranca-pix/{txid}")
 	public ResponseEntity<Pix> consultarCobranca(@RequestHeader(required = true, name = "Authorization") String bearer,
-			String txid) {
-		return new ResponseEntity<Pix>(pix.consultarPixObject(bearer, "7Na2N1E25TnDWmlD7A26limfqIwieoVXfO9"),
-				HttpStatus.OK);
+			@PathVariable String txid) {
+
+		return new ResponseEntity<Pix>(pix.consultarPixObject(bearer, txid), HttpStatus.OK);
+
 	}
 }

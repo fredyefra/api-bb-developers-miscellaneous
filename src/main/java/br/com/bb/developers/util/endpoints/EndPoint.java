@@ -30,4 +30,9 @@ public final class EndPoint {
 	 */
 	public static final String ENDPOINT_PIX_CONSULTAR = "https://api.hm.bb.com.br/pix/v1";
 
+	/**
+	 * @see Constante equivalente a "https://api.hm.bb.com.br/pix/v1/cob/".
+	 */
+	public static final String ENDPOINT_PIX_REVISAR = "https://api.hm.bb.com.br/pix/v1";
+
 }
