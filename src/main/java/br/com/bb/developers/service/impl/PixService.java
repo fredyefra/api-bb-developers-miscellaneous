@@ -41,7 +41,8 @@ public class PixService implements PixWrapper {
 	             })
 				.bodyToMono(Pix.class);		
 	
-				Pix block = object.share().block();
+		        Pix block = object.share().block();
+				//this.pix = object.share().block();
 				
 		return block;	
 	}
@@ -68,7 +69,34 @@ public class PixService implements PixWrapper {
 		         .bodyToMono(Pix.class);		
 
 		         Pix block = object.share().block();
+		                  
+        return block;
+	}
+
+	@Override
+	public Pix revisarPixObject(String bearer, String txid, String status) { 
+        
+		WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_PIX_REVISAR);
 		
+		Mono<Pix> object = client.patch()
+				.uri(builder -> builder.path("/cob/{:txid}")
+				.queryParam("gw-dev-app-key","d27b577902ffabc01361e17db0050356b931a5ba")
+			    .build(txid))
+		        .header("Authorization" ,bearer)
+		        .header("Content-Type", "application/json")
+		        .accept(org.springframework.http.MediaType.APPLICATION_JSON)
+		        .bodyValue(status)
+		        .retrieve()
+		        .onStatus(HttpStatus::is4xxClientError, response -> {
+                     return Mono.error(new NotFoundException("Deu zica erro 404"));
+                 })
+		         .onStatus(HttpStatus::is5xxServerError, response -> {
+                      return Mono.error(new ErrorInternalException("Deu zica erro 500"));
+                 })
+		         .bodyToMono(Pix.class);		
+
+		         Pix block = object.share().block();
+		         
         return block;
 	}
 }

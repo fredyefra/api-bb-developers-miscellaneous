@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,7 +44,7 @@ public class APICobrancaPIXResource {
 	public ResponseEntity<Pix> gerarCobranca(@RequestHeader(required = true, name = "Authorization") String bearer,
 			@RequestBody Pix cobranca) {
 		
-		return new ResponseEntity<Pix>(pix.gerarPixObject(bearer, cobranca), HttpStatus.CREATED);
+        return new ResponseEntity<Pix>(pix.gerarPixObject(bearer, cobranca), HttpStatus.CREATED);
 	}
 
 	@ApiOperation(value = "Consulta a cobrança PIX.")
@@ -52,6 +53,15 @@ public class APICobrancaPIXResource {
 			@PathVariable String txid) {
 
 		return new ResponseEntity<Pix>(pix.consultarPixObject(bearer, txid), HttpStatus.OK);
+
+	}
+
+	@ApiOperation(value = "Revisa a cobrança PIX.")
+	@PatchMapping(value = "/revisar-cobranca-pix/{txid}")
+	public ResponseEntity<Pix> revisarCobranca(@RequestHeader(required = true, name = "Authorization") String bearer,
+			@PathVariable String txid, @RequestBody String status) {
+
+		return new ResponseEntity<Pix>(pix.revisarPixObject(bearer, txid, status), HttpStatus.OK);
 
 	}
 }
