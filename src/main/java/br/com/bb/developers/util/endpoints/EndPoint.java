@@ -35,4 +35,9 @@ public final class EndPoint {
 	 */
 	public static final String ENDPOINT_PIX_REVISAR = "https://api.hm.bb.com.br/pix/v1";
 
+	/**
+	 * @see Constante equivalente a "https://api.hm.bb.com.br".
+	 */
+	public static final String END_POINT_LOGIN_OAUTH = "https://api.hm.bb.com.br";
+
 }
