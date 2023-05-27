@@ -19,13 +19,13 @@ import reactor.core.publisher.Mono;
 public class PixService implements PixWrapper {
 
 	@Override
-	public Pix gerarPixObject(String bearer, Pix pix) {
+	public Pix gerarPixObject(String bearer, String gw_dev_app_key, Pix pix) {
 		
         WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_PIX_COBRANCA);
 		
 		Mono<Pix> object = client.put()
 				.uri(builder -> builder.path("/cob/")
-				.queryParam("gw-dev-app-key","d27b577902ffabc01361e17db0050356b931a5ba")
+				.queryParam("gw-dev-app-key", gw_dev_app_key)//"d27b577902ffabc01361e17db0050356b931a5ba"
 				.build())
 				.header("Authorization" ,bearer)
 				.header("Content-Type", "application/json")
@@ -48,13 +48,13 @@ public class PixService implements PixWrapper {
 	}
 
 	@Override
-	public Pix consultarPixObject(String bearer, String txid) {
+	public Pix consultarPixObject(String bearer, String gw_dev_app_key, String txid) {
 		
 		WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_PIX_CONSULTAR);
 		
 		Mono<Pix> object = client.get()
 				.uri(builder -> builder.path("/cob/{:txid}")
-				.queryParam("gw-dev-app-key","d27b577902ffabc01361e17db0050356b931a5ba")
+				.queryParam("gw-dev-app-key", gw_dev_app_key)
 			    .build(txid))
 		        .header("Authorization" ,bearer)
 		        .header("Content-Type", "application/json")
@@ -74,13 +74,13 @@ public class PixService implements PixWrapper {
 	}
 
 	@Override
-	public Pix revisarPixObject(String bearer, String txid, String status) { 
+	public Pix revisarPixObject(String bearer, String gw_dev_app_key, String txid, String status) { 
         
 		WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_PIX_REVISAR);
 		
 		Mono<Pix> object = client.patch()
 				.uri(builder -> builder.path("/cob/{:txid}")
-				.queryParam("gw-dev-app-key","d27b577902ffabc01361e17db0050356b931a5ba")
+				.queryParam("gw-dev-app-key", gw_dev_app_key)
 			    .build(txid))
 		        .header("Authorization" ,bearer)
 		        .header("Content-Type", "application/json")
