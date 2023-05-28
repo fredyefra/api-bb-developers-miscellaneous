@@ -19,13 +19,13 @@ import reactor.core.publisher.Mono;
 public class ContaAtivaService implements ContaAtivaWrapper {
 
 	@Override
-	public ContaAtiva contaAtivaObject(String bearer) {
+	public ContaAtiva contaAtivaObject(String bearer, String gw_dev_app_key) {
 		
 		WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_CONTA_ATIVA);
 		
 		ContaAtiva object = client.get()
 				.uri(builder -> builder.path("/contas/0551-1000/situacao")
-				.queryParam("gw-app-key", "d27ba77903ffabc01361e17dc0050e56b941a5be")
+				.queryParam("gw-app-key", gw_dev_app_key)
 				.queryParam("cpfCnpj", "5887148012")
 				.build())
 				.header("Authorization" , bearer)
