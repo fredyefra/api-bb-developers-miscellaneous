@@ -1,7 +1,7 @@
 package br.com.bb.developers.util.endpoints;
 
 /**
- * @author proitec-legacy 
+ * @author fredyefra 
  * @see Endpoints disponíveis no bb developers.
  */
 public final class EndPoint {
@@ -11,9 +11,14 @@ public final class EndPoint {
 	}
 
 	/**
-	 * @see Constante equivalente a "https://oauth.hm.bb.com.br/oauth/token".
+	 * @see Constante para o fluxo authorization code "https://oauth.hm.bb.com.br/ui/authorize".
 	 */
-	public static final String ENDPOINT_TOKEN = "https://oauth.hm.bb.com.br/oauth/token";
+	public static final String ENDPOINT_AUTHORIZATION_CODE = "https://oauth.hm.bb.com.br";
+	
+	/**
+	 * @see Constante para o fluxo client credentials "https://oauth.hm.bb.com.br/oauth/token".
+	 */
+	public static final String ENDPOINT_CLIENT_CREDENTIALS = "https://oauth.hm.bb.com.br/oauth/token";
 
 	/**
 	 * @see Constante equivalente a "https://api.hm.bb.com.br/validacao-contas/v1".

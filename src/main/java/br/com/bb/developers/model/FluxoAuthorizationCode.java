@@ -3,12 +3,14 @@ package br.com.bb.developers.model;
 import java.io.Serializable;
 
 /**
- * @author proitec-legacy
- * @see OAuth2 representa o protocolo de autorização que permite o acesso limitado a contas de usuários 
+ * @author fredyefra
+ * @see FluxoAuthorizationCode: Fluxo de autorização do OAuth requer alem da identificação da aplicação, 
+ * a expressa autorização de um usuário (terceiro). Este fluxo se inicia com a aplicação direcionando 
+ * o cliente para a Interface Gráfica do OAuth do Banco do Brasil 
  * em um serviço HTTP sem a necessidade de enviar usuário/senha.
  */
 
-public class OAuth2 implements Serializable {
+public class FluxoAuthorizationCode implements Serializable {
     
 	private static final long serialVersionUID = 1L;
     private String response_type;
@@ -17,7 +19,7 @@ public class OAuth2 implements Serializable {
     private String scope;
     private String state;
     
-    public OAuth2() {
+    public FluxoAuthorizationCode() {
 	
 	}
 
