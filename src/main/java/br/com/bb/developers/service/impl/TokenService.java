@@ -28,7 +28,7 @@ public class TokenService implements TokenWrapper {
 
 		Token object = client.post()
 				//.uri(ENDPOINT)
-				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_TOKEN)
+				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_CLIENT_CREDENTIALS)
 				.header("Authorization", basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters.fromFormData(body))
@@ -50,7 +50,7 @@ public class TokenService implements TokenWrapper {
 
 		Token token = client.post()
 				//.uri(ENDPOINT)
-				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_TOKEN)
+				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_CLIENT_CREDENTIALS)
 				. header("Authorization", basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters
