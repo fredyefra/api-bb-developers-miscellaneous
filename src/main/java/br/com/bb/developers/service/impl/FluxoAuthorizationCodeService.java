@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 /**
  * @author fredyefra
  * @apiNote Este fluxo se inicia com a aplicação direcionando 
- * o cliente para a Interface Gráfica do OAuth do Banco do Brasil.
+ * o cliente para a Interface Gráfica do OAuth do BB.
  * @see FluxoAuthorizationCode
  */
 

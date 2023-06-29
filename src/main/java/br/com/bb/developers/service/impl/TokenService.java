@@ -1,16 +1,20 @@
 package br.com.bb.developers.service.impl;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import br.com.bb.developers.exception.ErrorInternalException;
+import br.com.bb.developers.exception.NotFoundException;
 import br.com.bb.developers.model.Token;
 import br.com.bb.developers.service.TokenWrapper;
+import reactor.core.publisher.Mono;
 
 /**
- * @author proitec-legacy
+ * @author fredyefra
  * @apiNote Classe com os parametros de configuração do token.
  * @see Token
  */
@@ -26,17 +30,24 @@ public class TokenService implements TokenWrapper {
 		body.add("grant_type", client_credentials);
 		body.add("scope", scope);
 
-		Token object = client.post()
-				//.uri(ENDPOINT)
+		Mono<Token> request = client.post()
 				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_CLIENT_CREDENTIALS)
 				.header("Authorization", basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromFormData(body))
+				.body(BodyInserters
+				.fromFormData(body))
 				.retrieve()
-				.bodyToMono(Token.class)
-				.block();
-
-		return object;
+				.onStatus(HttpStatus::is4xxClientError, response -> {
+	                 return Mono.error(new NotFoundException(HttpStatus.NOT_FOUND.toString()));
+	             })
+				.onStatus(HttpStatus::is5xxServerError, response -> {
+	                 return Mono.error(new ErrorInternalException(HttpStatus.INTERNAL_SERVER_ERROR.toString()));
+	             })
+				.bodyToMono(Token.class);
+				
+                Token token = request.block(); 
+		
+		return token;
 	}
 
 	@Override
@@ -48,19 +59,22 @@ public class TokenService implements TokenWrapper {
 		body.add("grant_type", client_credentials);
 		body.add("scope", scope);
 
-		Token token = client.post()
-				//.uri(ENDPOINT)
+		Mono<Token> request = client.post()
 				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_CLIENT_CREDENTIALS)
 				. header("Authorization", basic)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters
 				.fromFormData(body))
-				.retrieve()
-				.bodyToMono(Token.class)
-				.block();
+				.retrieve().onStatus(HttpStatus::is4xxClientError, response -> {
+	                 return Mono.error(new NotFoundException(HttpStatus.NOT_FOUND.toString()));
+	             })
+				.onStatus(HttpStatus::is5xxServerError, response -> {
+	                 return Mono.error(new ErrorInternalException(HttpStatus.INTERNAL_SERVER_ERROR.toString()));
+	             })
+				.bodyToMono(Token.class);
 
-		String tokenAccess = token.getAccess_token();
+		String token = request.block().getAccess_token();
 
-		return tokenAccess;
+		return token;
 	}
 }
