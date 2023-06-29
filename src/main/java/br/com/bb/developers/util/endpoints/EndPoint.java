@@ -18,8 +18,9 @@ public final class EndPoint {
 	/**
 	 * @see Constante para o fluxo client credentials "https://oauth.hm.bb.com.br/oauth/token".
 	 */
+	//public static final String ENDPOINT_CLIENT_CREDENTIALS = "https://oauth.hm.bb.com.br/oauth/token";
 	public static final String ENDPOINT_CLIENT_CREDENTIALS = "https://oauth.hm.bb.com.br/oauth/token";
-
+	
 	/**
 	 * @see Constante equivalente a "https://api.hm.bb.com.br/validacao-contas/v1".
 	 */
