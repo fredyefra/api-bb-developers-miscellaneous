@@ -21,7 +21,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 //@CrossOrigin("*") 
-@Api(value = "pix-resource", tags = "Endpoints destinados a cobrança de PIX.")
+@Api(value = "pix-resource", tags = "Endpoint para cobrança de PIX.")
 @RestController
 @RequestMapping(value = "developers/bb/cob-pix/v1")
 public class APICobrancaPIXResource {
@@ -70,7 +70,8 @@ public class APICobrancaPIXResource {
 	public ResponseEntity<Pix> revisarCobranca(
 			@RequestHeader(required = true, name = "Authorization") String bearer,
 			@RequestParam  (required = true, name = "gw-dev-app-key")  String gw_dev_app_key,
-			@PathVariable String txid, @RequestBody String status) 
+			@PathVariable String txid, 
+			@RequestBody String status) 
 	{
 
 		return new ResponseEntity<Pix>(pix.revisarPixObject(bearer, gw_dev_app_key,  txid, status), HttpStatus.OK);
