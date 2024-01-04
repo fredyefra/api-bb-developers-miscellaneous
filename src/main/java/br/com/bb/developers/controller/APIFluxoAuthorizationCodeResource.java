@@ -21,9 +21,10 @@ public class APIFluxoAuthorizationCodeResource {
 	@Autowired
 	private FluxoAuthorizationCodeWrapper fluxoAuthCode;
 
-	//@RequestParam  (required = true, name = "gw-dev-app-key")  String gw_dev_app_key,
 	@GetMapping(value = "/fluxo-auth-code")
-	public ResponseEntity<Mono<String>> authCode(@RequestParam (required = true, name = "client_id")@Parameter(example = "client_id", description = "client_id") String client_id) {
+	public ResponseEntity<Mono<String>> authCode(@RequestParam (required = true, name = "client_id")
+	                                             @Parameter(example = "client_id", description = "client_id") String client_id) 
+	{
 		
 		return ResponseEntity.ok(fluxoAuthCode.authorizationCodehString(client_id));
 	}
