@@ -3,6 +3,7 @@ package br.com.bb.developers.service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import br.com.bb.developers.model.FluxoAuthorizationCode;
+import reactor.core.publisher.Mono;
 
 /**
  * @author fredyefra
@@ -22,8 +23,8 @@ public interface FluxoAuthorizationCodeWrapper {
 	 * @param scope         - portal developers BB
 	 * @param state         - portal developers BB
 	 */
-	public FluxoAuthorizationCode authorizationCodeObject();
+	public FluxoAuthorizationCode authorizationCodeObject(String client_id);
 	
-	public FluxoAuthorizationCode authorizationCodehObject2(FluxoAuthorizationCode fluxoAuthorizationCode);
+	public Mono<String> authorizationCodehString(String client_id);
 	
 }
