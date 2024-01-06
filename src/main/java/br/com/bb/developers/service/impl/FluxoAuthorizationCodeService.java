@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 /**
  * @author fredyefra
  * @apiNote Este fluxo se inicia com a aplicação direcionando 
- * o cliente para a Interface Gráfica do OAuth do BB.
+ * o cliente para a Interface Gráfica do OAuth (Fluxo Auth Code) do BB.
  * @see FluxoAuthorizationCode
  */
 
@@ -19,11 +19,11 @@ import reactor.core.publisher.Mono;
 public class FluxoAuthorizationCodeService implements FluxoAuthorizationCodeWrapper {
 
 	@Override
-	public FluxoAuthorizationCode authorizationCodeObject(String client_id) {
+	public Mono<FluxoAuthorizationCode> authorizationCodeObject(String client_id) {
 		
 		WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_AUTHORIZATION_CODE);
 		
-		Mono<FluxoAuthorizationCode> request = client.get()
+		return   client.get()
 				.uri(builder -> builder.path("/ui/authorize")
 				.queryParam("response_type", "code") //Informa ao servidor de autorização que o aplicativo está iniciando o fluxo \"Authorization Code\
 				.queryParam("client_id", client_id) //Identificador do aplicativo, obtido quando o DEV registra o aplicativo pela primeira vez
@@ -36,9 +36,9 @@ public class FluxoAuthorizationCodeService implements FluxoAuthorizationCodeWrap
 				.retrieve()
 				.bodyToMono(FluxoAuthorizationCode.class);
 		
-		FluxoAuthorizationCode response = request.share().block();
+		//FluxoAuthorizationCode response = request.share().block();
 		
-		return response;
+		//return response;
 	}
 
 	@Override

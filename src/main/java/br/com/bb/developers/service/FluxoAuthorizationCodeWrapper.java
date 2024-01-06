@@ -23,7 +23,7 @@ public interface FluxoAuthorizationCodeWrapper {
 	 * @param scope         - portal developers BB
 	 * @param state         - portal developers BB
 	 */
-	public FluxoAuthorizationCode authorizationCodeObject(String client_id);
+	public Mono<FluxoAuthorizationCode> authorizationCodeObject(String client_id);
 	
 	public Mono<String> authorizationCodehString(String client_id);
 	

@@ -1,7 +1,6 @@
 package br.com.bb.developers.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,10 +21,10 @@ public class APIFluxoAuthorizationCodeResource {
 	private FluxoAuthorizationCodeWrapper fluxoAuthCode;
 
 	@GetMapping(value = "/fluxo-auth-code")
-	public ResponseEntity<Mono<String>> authCode(@RequestParam (required = true, name = "client_id")
+	public Mono<String> authCode(@RequestParam (required = true, name = "client_id")
 	                                             @Parameter(example = "client_id", description = "client_id") String client_id) 
 	{
-		
-		return ResponseEntity.ok(fluxoAuthCode.authorizationCodehString(client_id));
+
+		return fluxoAuthCode.authorizationCodehString(client_id);
 	}
 }
