@@ -5,10 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.server.ServerRequest;
+import org.springframework.web.reactive.function.server.ServerResponse;
 
+import br.com.bb.developers.model.FluxoAuthorizationCode;
 import br.com.bb.developers.service.FluxoAuthorizationCodeWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Parameter;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
@@ -27,4 +31,15 @@ public class APIFluxoAuthorizationCodeResource {
 
 		return fluxoAuthCode.authorizationCodehString(client_id);
 	}
+
+
+	/*
+	 * public Mono<org.springframework.web.reactive.function.server.ServerResponse>
+	 * listPeople(ServerRequest request) { Flux<FluxoAuthorizationCode> people =
+	 * null; return ok().contentType(APPLICATION_JSON).body(people,
+	 * FluxoAuthorizationCode.class); }
+	 */
+	
+
+
 }
