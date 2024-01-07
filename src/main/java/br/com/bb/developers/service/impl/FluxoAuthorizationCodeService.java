@@ -1,5 +1,7 @@
 package br.com.bb.developers.service.impl;
 
+import java.util.Base64;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -49,7 +51,7 @@ public class FluxoAuthorizationCodeService implements FluxoAuthorizationCodeWrap
 		return   client.get()
 				.uri(builder -> builder.path("/ui/authorize")
 				.queryParam("response_type", "code")
-				.queryParam("client_id", client_id)
+				.queryParam("client_id", decodeClientId(client_id))
 				.queryParam("state", "123")
 				.queryParam("scope", "openid-otp")
 				.queryParam("redirect_uri", "https://www.getpostman.com")
@@ -63,5 +65,7 @@ public class FluxoAuthorizationCodeService implements FluxoAuthorizationCodeWrap
 
 	}
 
+	private String decodeClientId(String clientId) {
+		return Base64.getEncoder().encodeToString(clientId.getBytes());
+	}
 }
-
