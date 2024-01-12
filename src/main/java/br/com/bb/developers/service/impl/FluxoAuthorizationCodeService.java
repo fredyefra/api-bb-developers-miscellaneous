@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
  */
 
 @Service
-public class FluxoAuthorizationCodeService implements FluxoAuthorizationCodeWrapper {
+public class FluxoAuthorizationCodeService implements FluxoAuthorizationCodeWrapper  {
 
 	@Override
 	public Mono<FluxoAuthorizationCode> authorizationCodeObject(String client_id) {
@@ -44,7 +44,7 @@ public class FluxoAuthorizationCodeService implements FluxoAuthorizationCodeWrap
 	}
 
 	@Override
-	public Mono<String> authorizationCodehString(String client_id) {
+	public Mono<String> authorizationCodehString(final String client_id) {
     
 		WebClient client = WebClient.create(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_AUTHORIZATION_CODE);
 		
@@ -60,8 +60,6 @@ public class FluxoAuthorizationCodeService implements FluxoAuthorizationCodeWrap
 				.accept(org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED)
 				.retrieve()
 				.bodyToMono(String.class);
-				
-		//return request;
 
 	}
 
