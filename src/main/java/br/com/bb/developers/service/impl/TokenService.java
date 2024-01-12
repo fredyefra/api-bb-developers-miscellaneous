@@ -6,9 +6,11 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 
 import br.com.bb.developers.exception.ErrorInternalException;
 import br.com.bb.developers.exception.NotFoundException;
+import br.com.bb.developers.model.FluxoAuthorizationCode;
 import br.com.bb.developers.model.Token;
 import br.com.bb.developers.service.TokenWrapper;
 import reactor.core.publisher.Mono;
@@ -65,7 +67,8 @@ public class TokenService implements TokenWrapper {
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
 				.body(BodyInserters
 				.fromFormData(body))
-				.retrieve().onStatus(HttpStatus::is4xxClientError, response -> {
+				.retrieve()
+				.onStatus(HttpStatus::is4xxClientError, response -> {
 	                 return Mono.error(new NotFoundException(HttpStatus.NOT_FOUND.toString()));
 	             })
 				.onStatus(HttpStatus::is5xxServerError, response -> {
@@ -76,5 +79,24 @@ public class TokenService implements TokenWrapper {
 		String token = request.block().getAccess_token();
 
 		return token;
+	}
+
+	// TODO Testar esse fluxo 
+	@Override
+	public FluxoAuthorizationCode getAccessToken(String authorization_code, String code, String redirect_uri, String basic) {
+		
+		WebClient client = WebClient.create();
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("grant_type", authorization_code);
+		body.add("code", code);
+		body.add("redirect_uri", redirect_uri);
+		
+				 RequestBodySpec accept = client.post()
+				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_CLIENT_CREDENTIALS)
+				.header("Authorization", basic)
+				.accept(org.springframework.http.MediaType.APPLICATION_JSON);
+				 
+		return null;
 	}
 }
