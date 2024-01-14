@@ -11,12 +11,17 @@ System requirements :computer:
 2. Maven 3.1 or better, 
 3. Dependency spring-boot-starter-webflux reactive streams.
 
-Running :electric_plug:
+Running :wrench:
 -------------------
 
 1. Open terminal and navigate to your project
 2. Execute  ``` ./mvnw clean install  ```
 3. Finally  ``` ./mvnw spring-boot:run -DskipTests=true ```
+
+Check application running state :electric_plug:
+-------------------
+
+Route: http://localhost:8080/swagger-ui.html
 
 Documentation :books:
 -------------------
