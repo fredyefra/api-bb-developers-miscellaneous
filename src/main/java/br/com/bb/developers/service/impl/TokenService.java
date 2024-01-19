@@ -83,20 +83,35 @@ public class TokenService implements TokenWrapper {
 
 	// TODO Testar esse fluxo 
 	@Override
-	public FluxoAuthorizationCode getAccessToken(String authorization_code, String code, String redirect_uri, String basic) {
+	public Mono<String> getAccessTokenTeste(String code, String basic) {
 		
 		WebClient client = WebClient.create();
 		
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-		body.add("grant_type", authorization_code);
+		body.add("grant_type", "authorization_code");
 		body.add("code", code);
-		body.add("redirect_uri", redirect_uri);
+		body.add("redirect_uri", "https://www.getpostman.com\"");
 		
-				 RequestBodySpec accept = client.post()
+		Mono<String> request = client.post()
 				.uri(br.com.bb.developers.util.endpoints.EndPoint.ENDPOINT_CLIENT_CREDENTIALS)
-				.header("Authorization", basic)
-				.accept(org.springframework.http.MediaType.APPLICATION_JSON);
-				 
-		return null;
+				. header("Authorization", basic)
+				.accept(org.springframework.http.MediaType.APPLICATION_JSON)
+				.body(BodyInserters
+				.fromFormData(body))
+				.retrieve()
+				.onStatus(HttpStatus::is4xxClientError, response -> {
+	                 return Mono.error(new NotFoundException(HttpStatus.NOT_FOUND.toString()));
+	             })
+				.onStatus(HttpStatus::is5xxServerError, response -> {
+	                 return Mono.error(new ErrorInternalException(HttpStatus.INTERNAL_SERVER_ERROR.toString()));
+	             })
+				.bodyToMono(String.class);
+
+		request.log();
+
+		
+		
+		return request;
+
 	}
 }

@@ -3,7 +3,7 @@ package br.com.bb.developers.model;
 import java.io.Serializable;
 
 /**
- * @author proitec-legacy
+ * @author fredyefra
  * Classe que 'representa' a conta ativa com as informações do ENDPOINT.
  */
 public class ContaAtiva implements Serializable {

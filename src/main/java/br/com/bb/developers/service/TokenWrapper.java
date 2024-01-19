@@ -4,6 +4,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import br.com.bb.developers.model.FluxoAuthorizationCode;
 import br.com.bb.developers.model.Token;
+import reactor.core.publisher.Mono;
 
 public interface TokenWrapper {
 
@@ -35,7 +36,11 @@ public interface TokenWrapper {
 
 
 	
-	public FluxoAuthorizationCode  getAccessToken(String authorization_code, String code, String redirect_uri, String basic);
+	//public FluxoAuthorizationCode  getAccessToken(String authorization_code, String code, String redirect_uri, String basic);
 
+	//public String  getAccessTokenTeste(String authorization_code, String code, String redirect_uri, String basic);
+	
+	public Mono<String>  getAccessTokenTeste(String code, String basic);
+	
 
 }
